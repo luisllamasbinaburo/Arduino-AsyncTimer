@@ -60,6 +60,15 @@ bool AsyncTimer::Update()
 	return _isExpired;
 }
 
+void AsyncTimer::Update(AsyncTimer &next)
+{
+	if (Update())
+	{
+		_isExpired = false;
+		next.Start();
+	}
+}
+
 void AsyncTimer::SetIntervalMillis(unsigned long interval)
 {
 	Interval = 1000 * interval;
@@ -93,4 +102,20 @@ bool AsyncTimer::IsActive() const
 bool AsyncTimer::IsExpired() const
 {
 	return _isExpired;
+}
+
+void AsyncTimer::Every(unsigned long millisInterval, AsyncTimerCallback onFinish)
+{
+	this->SetIntervalMillis(millisInterval);
+	this->_onFinish = onFinish;
+	this->AutoReset = true;
+	this->Start();
+}
+
+void AsyncTimer::In(unsigned long millisInterval, AsyncTimerCallback onFinish)
+{
+	this->SetIntervalMillis(millisInterval);
+	this->AutoReset = false;
+	this->_conFinish = onFinish;
+	this->Start();
 }
