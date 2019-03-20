@@ -18,16 +18,17 @@ class AsyncTimer
 {
  public:
 	AsyncTimer(unsigned long microsInterval);
-	AsyncTimer(unsigned long microsInterval, AsyncTimerCallback OnFinish);
+	AsyncTimer(unsigned long microsInterval, AsyncTimerCallback onFinish);
 
 	AsyncTimer(unsigned long microsInterval, bool autoReset);
-	AsyncTimer(unsigned long microsInterval, bool autoReset, AsyncTimerCallback OnFinish);
+	AsyncTimer(unsigned long microsInterval, bool autoReset, AsyncTimerCallback onFinish);
 
 	void Start();
 	void Reset();
 	void Stop();
 	bool Update();
-
+	void Update(AsyncTimer &next);
+	
 	void SetIntervalMillis(unsigned long interval);
 	void SetIntervalMicros(unsigned long interval);
 	
@@ -42,6 +43,9 @@ class AsyncTimer
 	bool AutoReset;
 	
 	AsyncTimerCallback OnFinish;
+	
+	void Every(unsigned long millisInterval, AsyncTimerCallback onFinish);
+	void In(unsigned long millisInterval, AsyncTimerCallback onFinish);
 
 private:
 	bool _isActive;
