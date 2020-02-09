@@ -107,7 +107,7 @@ bool AsyncTimer::IsExpired() const
 void AsyncTimer::Every(unsigned long millisInterval, AsyncTimerCallback onFinish)
 {
 	this->SetIntervalMillis(millisInterval);
-	this->_onFinish = onFinish;
+	this->OnFinish = onFinish;
 	this->AutoReset = true;
 	this->Start();
 }
@@ -116,6 +116,6 @@ void AsyncTimer::In(unsigned long millisInterval, AsyncTimerCallback onFinish)
 {
 	this->SetIntervalMillis(millisInterval);
 	this->AutoReset = false;
-	this->_conFinish = onFinish;
+	this->OnFinish = onFinish;
 	this->Start();
 }
