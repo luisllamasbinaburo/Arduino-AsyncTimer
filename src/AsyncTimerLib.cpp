@@ -91,7 +91,7 @@ unsigned long AsyncTimer::GetElapsedTime()
 
 unsigned long AsyncTimer::GetRemainingTime()
 {
-	return interval - micros() + _startTime;
+	return Interval - micros() + _startTime;
 }
 
 bool AsyncTimer::IsActive() const
